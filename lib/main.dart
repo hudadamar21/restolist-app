@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:restoran/pages/DetailPage.dart';
-import 'package:restoran/pages/ListPage.dart';
+import 'package:restoran/pages/detail_page.dart';
+import 'package:restoran/pages/list_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Restaurant App',
+      title: 'Resto App',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
