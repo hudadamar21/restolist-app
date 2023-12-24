@@ -19,7 +19,7 @@ class _ListPageState extends State<ListPage> {
     final String response =
         await rootBundle.loadString('assets/restaurant.json');
     final data = await json.decode(response);
-    var list = data["restaurant"] as List;
+    var list = data["restaurants"] as List;
     setState(() {
       restolist = list.map((item) => Resto.fromJson(item)).toList();
     });

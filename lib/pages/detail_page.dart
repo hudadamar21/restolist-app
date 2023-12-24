@@ -101,7 +101,7 @@ class _DetailPageState extends State<DetailPage> {
                 CarouselList(
                   list: restaurant.menus.foods,
                   image:
-                      'https://www.herofincorp.com/public/admin_assets/upload/blog/64b91a06ab1c8_food%20business%20ideas.webp',
+                      'https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/newseventsimage_1675183852764_mainnews2012_x1.jpg',
                   price: 'Rp. 40.000',
                 ),
                 const SizedBox(height: 40),

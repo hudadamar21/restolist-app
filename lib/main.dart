@@ -17,9 +17,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const ListPage(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
         '/detail': (context) => const DetailPage(),
       },
       theme: ThemeData(
