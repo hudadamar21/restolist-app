@@ -60,24 +60,21 @@ class _ListPageState extends State<ListPage> {
                   SizedBox(height: 20),
                 ],
               ),
-              SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.80,
-                  child: ListView.builder(
-                    // the number of items in the list
-                    itemCount: restolist.length,
-                    // display each item of the product list
-                    itemBuilder: (context, index) {
-                      return RestoCard(
-                        restaurant: restolist[index],
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          '/detail',
-                          arguments: restolist[index],
-                        ),
-                      );
-                    },
-                  ),
+              Expanded(
+                child: ListView.builder(
+                  // the number of items in the list
+                  itemCount: restolist.length,
+                  // display each item of the product list
+                  itemBuilder: (context, index) {
+                    return RestoCard(
+                      restaurant: restolist[index],
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        '/detail',
+                        arguments: restolist[index],
+                      ),
+                    );
+                  },
                 ),
               )
             ],
