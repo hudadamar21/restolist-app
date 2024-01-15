@@ -22,6 +22,7 @@ class RestaurantListProvider extends ChangeNotifier {
   late ResultState _state;
 
   String _message = '';
+
   String get message => _message;
   RestaurantResult get restaurantResult => _restaurantResult;
   ResultState get state => _state;
@@ -30,26 +31,28 @@ class RestaurantListProvider extends ChangeNotifier {
     try {
       _state = ResultState.loading;
       notifyListeners();
+
       final restaurantList = await restaurantServices.getRestaurantList();
+
       if (restaurantList!.restaurants.isEmpty) {
         _state = ResultState.dataEmpty;
         notifyListeners();
         return _message = 'Empty Data';
-      } else {
-        _state = ResultState.dataValid;
-        notifyListeners();
-        return _restaurantResult = restaurantList;
       }
+
+      _state = ResultState.dataValid;
+      notifyListeners();
+      return _restaurantResult = restaurantList;
     } catch (e) {
       if (e is SocketException) {
         _state = ResultState.error;
         notifyListeners();
         return _message = 'No Internet Connection.';
-      } else {
-        _state = ResultState.error;
-        notifyListeners();
-        return _message = 'Failed to Load Data';
       }
+
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = 'Failed to Load Data';
     }
   }
 }

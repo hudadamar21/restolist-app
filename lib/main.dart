@@ -6,6 +6,7 @@ import 'package:restaurant_app/data/provider/restaurant_provider.dart';
 import 'package:restaurant_app/data/service/restaurant_services.dart';
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/list_page.dart';
+import 'package:restaurant_app/pages/search_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -32,6 +33,7 @@ class MainApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           ListPage.routeName: (context) => const ListPage(),
+          SearchPage.routeName: (context) => SearchPage(),
           DetailPage.routeName: (context) => const DetailPage(),
         },
         theme: ThemeData(
