@@ -1,4 +1,4 @@
-import 'package:restoran/types/menu.dart';
+import 'package:restaurant_app/types/menu.dart';
 
 class Resto {
   final String id;

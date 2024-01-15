@@ -1,34 +1,54 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:restoran/types/restaurant.dart';
-import 'package:restoran/widget/resto_card.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_provider.dart';
 
-class ListPage extends StatefulWidget {
+import 'package:restaurant_app/pages/detail_page.dart';
+import 'package:restaurant_app/widget/resto_card.dart';
+
+class ListPage extends StatelessWidget {
+  static const routeName = '/';
+
   const ListPage({super.key});
 
-  @override
-  State<ListPage> createState() => _ListPageState();
-}
-
-class _ListPageState extends State<ListPage> {
-  List<Resto> restolist = [];
-
-  Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/restaurant.json');
-    final data = await json.decode(response);
-    var list = data["restaurants"] as List;
-    setState(() {
-      restolist = list.map((item) => Resto.fromJson(item)).toList();
-    });
-  }
-
-  @override
-  void initState() {
-    readJson();
-    super.initState();
+  Widget _buildList(BuildContext context) {
+    return Consumer<RestaurantListProvider>(
+      builder: (context, state, _) {
+        if (state.state == ResultState.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.state == ResultState.dataValid) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.restaurantResult.restaurants.length,
+            itemBuilder: (context, index) {
+              var restoList = state.restaurantResult.restaurants[index];
+              return Consumer<RestaurantProvider>(
+                builder: (context, resto, _) => RestoCard(
+                  data: restoList,
+                  onTap: () => {
+                    Navigator.pushNamed(
+                      context,
+                      DetailPage.routeName,
+                    ),
+                    resto.changeRestaurantId(restoList.id)
+                  },
+                ),
+              );
+            },
+          );
+        } else if (state.state == ResultState.error) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
+        } else {
+          return const Material(child: Text(''));
+        }
+      },
+    );
   }
 
   @override
@@ -60,23 +80,7 @@ class _ListPageState extends State<ListPage> {
                   SizedBox(height: 20),
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  // the number of items in the list
-                  itemCount: restolist.length,
-                  // display each item of the product list
-                  itemBuilder: (context, index) {
-                    return RestoCard(
-                      restaurant: restolist[index],
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        '/detail',
-                        arguments: restolist[index],
-                      ),
-                    );
-                  },
-                ),
-              )
+              Expanded(child: _buildList(context))
             ],
           ),
         ),
@@ -85,11 +89,12 @@ class _ListPageState extends State<ListPage> {
   }
 }
 
-List<Resto> parseResto(String? json) {
-  if (json == null) {
-    return [];
-  }
 
-  final List parsed = jsonDecode(json);
-  return parsed.map((json) => Resto.fromJson(json)).toList();
-}
+// List<Resto> parseResto(String? json) {
+//   if (json == null) {
+//     return [];
+//   }
+
+//   final List parsed = jsonDecode(json);
+//   return parsed.map((json) => Resto.fromJson(json)).toList();
+// }
