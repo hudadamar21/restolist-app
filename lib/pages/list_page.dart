@@ -1,9 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:restoran/types/restaurant.dart';
-import 'package:restoran/widget/resto_card.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+
+import 'package:restaurant_app/pages/detail_page.dart';
+import 'package:restaurant_app/pages/search_page.dart';
+import 'package:restaurant_app/widget/resto_card.dart';
+
+class ListPage extends StatelessWidget {
+  static const routeName = '/';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -40,24 +47,46 @@ class _ListPageState extends State<ListPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 0),
-                  Text(
-                    'RestoList',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 36, 80, 173),
-                        fontSize: 32,
-                        fontWeight: FontWeight.w600),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'RestoList',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 36, 80, 173),
+                                fontSize: 32,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            'Recomandation restaurant for you!',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 63, 63, 63),
+                                fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Hero(
+                        tag: 'search button',
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              SearchPage.routeName,
+                            );
+                          },
+                          icon: const Icon(Icons.search, size: 30),
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 0),
-                  Text(
-                    'Recomandation restaurant for you!',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 63, 63, 63), fontSize: 14),
-                  ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
               Expanded(
@@ -83,13 +112,4 @@ class _ListPageState extends State<ListPage> {
       ),
     );
   }
-}
-
-List<Resto> parseResto(String? json) {
-  if (json == null) {
-    return [];
-  }
-
-  final List parsed = jsonDecode(json);
-  return parsed.map((json) => Resto.fromJson(json)).toList();
 }
