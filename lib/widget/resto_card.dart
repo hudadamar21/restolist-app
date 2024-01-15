@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_result.dart';
-import 'package:restaurant_app/widget/progressive_image.dart';
+import 'package:restoran/types/restaurant.dart';
+import 'package:restoran/widget/progressive_image.dart';
 
 class RestoCard extends StatelessWidget {
-  final Restaurant data;
+  final Resto restaurant;
   final void Function() onTap;
-  const RestoCard({super.key, required this.data, required this.onTap});
+  const RestoCard({super.key, required this.restaurant, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class RestoCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         // In many cases, the key isn't mandatory
-        key: ValueKey(data),
+        key: ValueKey(restaurant),
         margin: const EdgeInsets.symmetric(
           vertical: 10,
           horizontal: 0,
@@ -21,14 +21,13 @@ class RestoCard extends StatelessWidget {
         child: Row(
           children: [
             Hero(
-              tag: data.id,
+              tag: restaurant.id,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Stack(
                     children: [
                       ProgressiveImage(
-                        image:
-                            "https://restaurant-api.dicoding.dev/images/small/${data.pictureId}",
+                        image: restaurant.pictureId,
                         height: 100,
                         width: 130,
                       )
@@ -40,7 +39,7 @@ class RestoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  data.name,
+                  restaurant.name,
                   style: const TextStyle(
                     fontSize: 16,
                     color: Color.fromARGB(255, 36, 80, 173),
@@ -57,7 +56,7 @@ class RestoCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.city.toString(),
+                      restaurant.city.toString(),
                       style: const TextStyle(fontSize: 14),
                     )
                   ],
@@ -72,7 +71,7 @@ class RestoCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.rating.toString(),
+                      restaurant.rating.toString(),
                       style: const TextStyle(fontSize: 12),
                     )
                   ],

@@ -1,3 +1,3 @@
-# restaurant_app
+# restoran
 
 A new Flutter project.

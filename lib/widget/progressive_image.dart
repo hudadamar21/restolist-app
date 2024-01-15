@@ -20,7 +20,7 @@ class ProgressiveImage extends StatelessWidget {
     required this.height,
     required this.width,
     this.fit = BoxFit.cover,
-    this.imageError = 'assets/images/placeholder.png',
+    this.imageError = 'assets/placeholder.jpeg',
     this.baseColor = const Color(0xFFF4F4F4),
     this.highlightColor = const Color(0xFFDADADA),
   }) : super(key: key);

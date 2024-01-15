@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:restaurant_app/widget/progressive_image.dart';
+import 'package:restoran/widget/progressive_image.dart';
 
 class CarouselList extends StatelessWidget {
   final List list;
