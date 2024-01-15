@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/search_page.dart';
@@ -25,15 +25,12 @@ class ListPage extends StatelessWidget {
             itemCount: state.restaurantResult.restaurants.length,
             itemBuilder: (context, index) {
               var restoList = state.restaurantResult.restaurants[index];
-              return Consumer<RestaurantProvider>(
+              return Consumer<RestaurantDetailProvider>(
                 builder: (context, resto, _) => RestoCard(
                   data: restoList,
-                  onTap: () => {
-                    Navigator.pushNamed(
-                      context,
-                      DetailPage.routeName,
-                    ),
-                    resto.changeRestaurantId(restoList.id)
+                  onTap: () {
+                    Navigator.pushNamed(context, DetailPage.routeName);
+                    resto.getRestaurantDetail(restoList.id);
                   },
                 ),
               );

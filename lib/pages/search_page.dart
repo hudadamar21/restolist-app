@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/data/provider/restaurant_search_provider.dart';
 
 import 'package:restaurant_app/pages/detail_page.dart';
@@ -42,15 +42,12 @@ class _SearchPageState extends State<SearchPage> {
               .watch<RestaurantSearchProvider>()
               .result
               .restaurants[index];
-          return Consumer<RestaurantProvider>(
+          return Consumer<RestaurantDetailProvider>(
             builder: (context, resto, _) => RestoCard(
               data: restoList,
-              onTap: () => {
-                Navigator.pushNamed(
-                  context,
-                  DetailPage.routeName,
-                ),
-                resto.changeRestaurantId(restoList.id)
+              onTap: () {
+                Navigator.pushNamed(context, DetailPage.routeName);
+                resto.getRestaurantDetail(restoList.id);
               },
             ),
           );
@@ -99,6 +96,13 @@ class _SearchPageState extends State<SearchPage> {
                           Expanded(
                             child: TextField(
                               controller: _searchFieldController,
+                              onSubmitted: (value) {
+                                if (value.isEmpty) return;
+                                Provider.of<RestaurantSearchProvider>(context,
+                                        listen: false)
+                                    .searchRestaurant(
+                                        _searchFieldController.text);
+                              },
                               decoration: InputDecoration(
                                 hintText: 'Search..',
                                 border: OutlineInputBorder(

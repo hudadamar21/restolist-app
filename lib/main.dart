@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/data/service/restaurant_services.dart';
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/list_page.dart';
@@ -19,8 +19,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<RestaurantProvider>(
-          create: (context) => RestaurantProvider(),
+        ChangeNotifierProvider<RestaurantDetailProvider>(
+          create: (context) => RestaurantDetailProvider(),
         ),
         ChangeNotifierProvider<RestaurantListProvider>(
           create: (context) =>
@@ -33,7 +33,7 @@ class MainApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           ListPage.routeName: (context) => const ListPage(),
-          SearchPage.routeName: (context) => SearchPage(),
+          SearchPage.routeName: (context) => const SearchPage(),
           DetailPage.routeName: (context) => const DetailPage(),
         },
         theme: ThemeData(
