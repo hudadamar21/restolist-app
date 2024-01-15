@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/data/service/restaurant_services.dart';
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/list_page.dart';
@@ -16,17 +16,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Resto App',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const ListPage(),
-        '/detail': (context) => const DetailPage(),
-      },
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<RestaurantDetailProvider>(
+          create: (context) => RestaurantDetailProvider(),
         ),
         ChangeNotifierProvider<RestaurantListProvider>(
           create: (context) =>
@@ -39,7 +32,7 @@ class MainApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           ListPage.routeName: (context) => const ListPage(),
-          SearchPage.routeName: (context) => SearchPage(),
+          SearchPage.routeName: (context) => const SearchPage(),
           DetailPage.routeName: (context) => const DetailPage(),
         },
         theme: ThemeData(

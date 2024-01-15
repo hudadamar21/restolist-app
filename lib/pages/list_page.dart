@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_provider.dart';
+import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/search_page.dart';
@@ -15,27 +15,41 @@ class ListPage extends StatelessWidget {
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
-  @override
-  State<ListPage> createState() => _ListPageState();
-}
-
-class _ListPageState extends State<ListPage> {
-  List<Resto> restolist = [];
-
-  Future<void> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/restaurant.json');
-    final data = await json.decode(response);
-    var list = data["restaurants"] as List;
-    setState(() {
-      restolist = list.map((item) => Resto.fromJson(item)).toList();
-    });
-  }
-
-  @override
-  void initState() {
-    readJson();
-    super.initState();
+  Widget _buildList(BuildContext context) {
+    return Consumer<RestaurantListProvider>(
+      builder: (context, state, _) {
+        if (state.state == ResultState.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.state == ResultState.dataValid) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.restaurantResult.restaurants.length,
+            itemBuilder: (context, index) {
+              var restoList = state.restaurantResult.restaurants[index];
+              return Consumer<RestaurantDetailProvider>(
+                builder: (context, resto, _) => RestoCard(
+                  data: restoList,
+                  onTap: () {
+                    Navigator.pushNamed(context, DetailPage.routeName);
+                    resto.getRestaurantDetail(restoList.id);
+                  },
+                ),
+              );
+            },
+          );
+        } else if (state.state == ResultState.error) {
+          return Center(
+            child: Material(
+              child: Text(state.message),
+            ),
+          );
+        } else {
+          return const Material(child: Text(''));
+        }
+      },
+    );
   }
 
   @override
