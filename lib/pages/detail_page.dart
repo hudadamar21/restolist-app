@@ -3,16 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
 import 'package:restaurant_app/widget/carousel_list.dart';
 
-class DetailPage extends StatefulWidget {
+class DetailPage extends StatelessWidget {
   static const routeName = '/article_detail';
 
   const DetailPage({super.key});
 
-  @override
-  State<DetailPage> createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
