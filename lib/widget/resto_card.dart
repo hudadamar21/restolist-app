@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_model.dart';
+import 'package:restaurant_app/data/models/restaurant_model.dart';
 import 'package:restaurant_app/widget/progressive_image.dart';
 
 class RestoCard extends StatelessWidget {

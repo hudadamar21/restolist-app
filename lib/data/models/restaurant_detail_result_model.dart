@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:restaurant_app/data/model/restaurant_detail_model.dart';
+import 'package:restaurant_app/data/models/restaurant_detail_model.dart';
 
 RestaurantDetail restaurantDetailFromJson(String str) =>
     RestaurantDetail.fromJson(json.decode(str));

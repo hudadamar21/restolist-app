@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
+import 'package:restaurant_app/data/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_app/widget/carousel_list.dart';
 
 class DetailPage extends StatelessWidget {
