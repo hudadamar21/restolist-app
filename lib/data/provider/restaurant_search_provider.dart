@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_search.dart';
+import 'package:restaurant_app/data/model/restaurant_search_model.dart';
 import 'package:restaurant_app/data/service/restaurant_services.dart';
 
 class RestaurantSearchProvider extends ChangeNotifier {
@@ -17,7 +17,7 @@ class RestaurantSearchProvider extends ChangeNotifier {
   RestaurantSearch get result => _result;
 
   Future<dynamic> searchRestaurant(String value) async {
-    print(value);
+    debugPrint(value);
     try {
       _result = RestaurantSearch(error: true, founded: 0, restaurants: []);
       _isLoading = true;
@@ -33,7 +33,7 @@ class RestaurantSearchProvider extends ChangeNotifier {
 
       notifyListeners();
       _isLoading = false;
-      print(restaurantLists);
+      debugPrint(restaurantLists);
       return _result = restaurantLists;
     } catch (e) {
       if (e is SocketException) {
