@@ -10,6 +10,19 @@
 // import 'package:restaurant_app/data/provider/done_module_provider.dart';
 // import 'package:restaurant_app/main.dart';
 
+// import 'package:flutter/foundation.dart';
+
+// class DoneModuleProvider extends ChangeNotifier {
+//   final List<String> _doneModuleList = [];
+
+//   List<String> get doneModuleList => _doneModuleList;
+
+//   void complete(String moduleName) {
+//     _doneModuleList.add(moduleName);
+//     notifyListeners();
+//   }
+// }
+
 void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
