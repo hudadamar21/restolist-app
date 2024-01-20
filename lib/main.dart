@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:restaurant_app/data/provider/restaurant_list_provider.dart';
-import 'package:restaurant_app/data/provider/restaurant_detail_provider.dart';
-import 'package:restaurant_app/data/service/restaurant_services.dart';
+import 'package:restaurant_app/data/providers/restaurant_list_provider.dart';
+import 'package:restaurant_app/data/providers/restaurant_detail_provider.dart';
+import 'package:restaurant_app/data/services/restaurant_services.dart';
 import 'package:restaurant_app/pages/detail_page.dart';
 import 'package:restaurant_app/pages/list_page.dart';
 import 'package:restaurant_app/pages/search_page.dart';

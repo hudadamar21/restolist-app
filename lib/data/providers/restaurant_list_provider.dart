@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant_result_model.dart';
-import 'package:restaurant_app/data/service/restaurant_services.dart';
+import 'package:restaurant_app/data/models/restaurant_result_model.dart';
+import 'package:restaurant_app/data/services/restaurant_services.dart';
 
 enum ResultState {
   loading,

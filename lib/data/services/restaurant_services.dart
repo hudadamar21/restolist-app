@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:restaurant_app/data/model/restaurant_detail_result_model.dart';
-import 'package:restaurant_app/data/model/restaurant_result_model.dart';
-import 'package:restaurant_app/data/model/restaurant_search_model.dart';
+import 'package:restaurant_app/data/models/restaurant_detail_result_model.dart';
+import 'package:restaurant_app/data/models/restaurant_result_model.dart';
+import 'package:restaurant_app/data/models/restaurant_search_model.dart';
 
 class RestaurantServices {
   Future<RestaurantResult> getRestaurantList() async {
