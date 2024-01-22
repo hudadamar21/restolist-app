@@ -36,11 +36,13 @@ class RestaurantDetail {
         address: json["address"],
         pictureId: json["pictureId"],
         categories: List<MenuCategory>.from(
-            json["categories"].map((x) => MenuCategory.fromJson(x))),
+          json["categories"].map((x) => MenuCategory.fromJson(x)),
+        ),
         menus: Menu.fromJson(json["menus"]),
         rating: json["rating"]?.toDouble(),
         customerReviews: List<CustomerReview>.from(
-            json["customerReviews"].map((x) => CustomerReview.fromJson(x))),
+          json["customerReviews"].map((x) => CustomerReview.fromJson(x)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,10 +52,13 @@ class RestaurantDetail {
         "city": city,
         "address": address,
         "pictureId": pictureId,
-        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "categories": List<dynamic>.from(
+          categories.map((x) => x.toJson()),
+        ),
         "menus": menus.toJson(),
         "rating": rating,
-        "customerReviews":
-            List<dynamic>.from(customerReviews.map((x) => x.toJson())),
+        "customerReviews": List<dynamic>.from(
+          customerReviews.map((x) => x.toJson()),
+        ),
       };
 }
