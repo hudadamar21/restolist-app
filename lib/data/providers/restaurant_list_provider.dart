@@ -1,15 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/data/enums/ResultState.dart';
 import 'package:restaurant_app/data/models/restaurant_result_model.dart';
 import 'package:restaurant_app/data/services/restaurant_services.dart';
-
-enum ResultState {
-  loading,
-  dataEmpty,
-  dataValid,
-  error,
-}
 
 class RestaurantListProvider extends ChangeNotifier {
   final RestaurantServices restaurantServices;
@@ -52,7 +46,11 @@ class RestaurantListProvider extends ChangeNotifier {
 
       _state = ResultState.error;
       notifyListeners();
-      return _message = 'Failed to Load Data';
+      return _message = e.toString();
     }
+  }
+
+  getRestaurant(id) {
+    return restaurantResult.restaurants.firstWhere((resto) => resto.id == id);
   }
 }

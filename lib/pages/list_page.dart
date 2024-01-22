@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/enums/ResultState.dart';
 import 'package:restaurant_app/data/providers/restaurant_list_provider.dart';
 import 'package:restaurant_app/data/providers/restaurant_detail_provider.dart';
 
@@ -86,17 +87,59 @@ class ListPage extends StatefulWidget {
                           ),
                         ],
                       ),
-                      Hero(
-                        tag: 'search button',
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              SearchPage.routeName,
-                            );
-                          },
-                          icon: const Icon(Icons.search, size: 30),
-                        ),
+                      Row(
+                        children: [
+                          Hero(
+                            tag: 'search button',
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  SearchPage.routeName,
+                                );
+                              },
+                              icon: const Icon(Icons.search, size: 30),
+                            ),
+                          ),
+                          PopupMenuButton(
+                            onSelected: (newValue) {
+                              Navigator.pushNamed(
+                                context,
+                                newValue,
+                              );
+                            },
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                value: '/favorite',
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text('Favorite',
+                                        style: TextStyle(color: Colors.black87))
+                                  ],
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: '/setting',
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.settings,
+                                      color: Colors.black87,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text('Setting',
+                                        style: TextStyle(color: Colors.black87))
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       )
                     ],
                   ),

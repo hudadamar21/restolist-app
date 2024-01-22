@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/providers/restaurant_detail_provider.dart';
 import 'package:restaurant_app/widget/carousel_list.dart';
+import 'package:restaurant_app/widget/favorite_button.dart';
 
 class DetailPage extends StatelessWidget {
-  static const routeName = '/article_detail';
+  static const routeName = '/detail';
 
   const DetailPage({super.key});
 
@@ -36,11 +37,20 @@ class DetailPage extends StatelessWidget {
                         tag: state.result.id,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            "https://restaurant-api.dicoding.dev/images/medium/${state.result.pictureId}",
-                            width: MediaQuery.of(context).size.width,
-                            height: 250,
-                            fit: BoxFit.cover,
+                          child: Stack(
+                            children: [
+                              Image.network(
+                                "https://restaurant-api.dicoding.dev/images/medium/${state.result.pictureId}",
+                                width: MediaQuery.of(context).size.width,
+                                height: 250,
+                                fit: BoxFit.cover,
+                              ),
+                              Positioned(
+                                bottom: 10,
+                                right: 10,
+                                child: FavoriteButton(restaurant: state.result),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -96,42 +106,20 @@ class DetailPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 40),
-                      const Text(
-                        'Foods',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 36, 80, 173),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Text(
-                        'Lorem ipsum dolor sit amet, consectetuer.',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 63, 63, 63),
-                          fontSize: 14,
-                        ),
-                      ),
                       CarouselList(
+                        title: 'Foods',
+                        description:
+                            'Lorem ipsum dolor sit amet, consectetuer.',
                         list: state.result.menus.foods,
                         image:
                             'https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/newseventsimage_1675183852764_mainnews2012_x1.jpg',
                         price: 'Rp. 40.000',
                       ),
                       const SizedBox(height: 40),
-                      const Text(
-                        'Drinks',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 36, 80, 173),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Text(
-                        'Lorem ipsum dolor sit amet, consectetuer.',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 63, 63, 63),
-                          fontSize: 14,
-                        ),
-                      ),
                       CarouselList(
+                        title: 'Drinks',
+                        description:
+                            'Lorem ipsum dolor sit amet, consectetuer.',
                         list: state.result.menus.drinks,
                         image:
                             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK545VYmcGkOFuhUHMvr6U1aOxfP96-CN5dAND1RAMYUfY7mB2OquLODJYWN-D0whGlqw&usqp=CAU',

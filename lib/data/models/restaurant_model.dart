@@ -4,7 +4,7 @@ class Restaurant {
   String description;
   String pictureId;
   String city;
-  double rating;
+  num rating;
 
   Restaurant({
     required this.id,
@@ -21,7 +21,7 @@ class Restaurant {
         description: json["description"],
         pictureId: json["pictureId"],
         city: json["city"],
-        rating: json["rating"]?.toDouble(),
+        rating: json["rating"],
       );
 
   Map<String, dynamic> toJson() => {

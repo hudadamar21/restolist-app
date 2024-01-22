@@ -83,12 +83,16 @@ class _SearchPageState extends State<SearchPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Search',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 36, 80, 173),
-                            fontSize: 32,
-                            fontWeight: FontWeight.w600),
+                      const Row(
+                        children: [
+                          Text(
+                            'Search',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 36, 80, 173),
+                                fontSize: 32,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 10),
                       Row(
@@ -98,18 +102,20 @@ class _SearchPageState extends State<SearchPage> {
                               controller: _searchFieldController,
                               onSubmitted: (value) {
                                 if (value.isEmpty) return;
-                                Provider.of<RestaurantSearchProvider>(context,
-                                        listen: false)
-                                    .searchRestaurant(
-                                        _searchFieldController.text);
+                                Provider.of<RestaurantSearchProvider>(
+                                  context,
+                                  listen: false,
+                                ).searchRestaurant(_searchFieldController.text);
                               },
                               decoration: InputDecoration(
                                 hintText: 'Search..',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                contentPadding:
-                                    const EdgeInsets.only(left: 15, right: 15),
+                                contentPadding: const EdgeInsets.only(
+                                  left: 15,
+                                  right: 15,
+                                ),
                               ),
                             ),
                           ),
@@ -119,10 +125,10 @@ class _SearchPageState extends State<SearchPage> {
                             child: IconButton(
                               onPressed: () {
                                 if (_searchFieldController.text.isEmpty) return;
-                                Provider.of<RestaurantSearchProvider>(context,
-                                        listen: false)
-                                    .searchRestaurant(
-                                        _searchFieldController.text);
+                                Provider.of<RestaurantSearchProvider>(
+                                  context,
+                                  listen: false,
+                                ).searchRestaurant(_searchFieldController.text);
                               },
                               icon: const Icon(
                                 Icons.search,
