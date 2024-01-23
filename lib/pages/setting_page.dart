@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/providers/schedule_provider.dart';
 
 class SettingPage extends StatelessWidget {
   static const routeName = '/setting';
@@ -53,7 +55,16 @@ class SettingPage extends StatelessWidget {
                               )
                             ],
                           )),
-                          Switch(value: true, onChanged: (value) {})
+                          Consumer<ScheduleProvider>(
+                            builder: (context, provider, child) {
+                              return Switch.adaptive(
+                                value: provider.isDailyReminderActive,
+                                onChanged: (value) {
+                                  provider.enableDailyReminder(value);
+                                },
+                              );
+                            },
+                          ),
                         ],
                       )
                     ],
