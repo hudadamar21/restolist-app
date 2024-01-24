@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/models/restaurant_favorite_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -39,16 +40,16 @@ class DatabaseHelper {
     final db = await database;
     try {
       await db?.insert(_tblFavorite, {"restaurantId": id});
-      print(id);
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
   Future<List<RestaurantFavorite>> getFavorites() async {
     final db = await database;
     List<Map<String, dynamic>> results = await db!.query(_tblFavorite);
-    print(results);
     return results.map((res) => RestaurantFavorite.fromJson(res)).toList();
   }
 

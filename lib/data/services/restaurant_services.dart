@@ -28,7 +28,6 @@ class RestaurantServices {
   Future searchRestaurant(query) async {
     final response = await http
         .get(Uri.parse('https://restaurant-api.dicoding.dev/search?q=$query'));
-    print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return RestaurantSearch.fromJson(data);
