@@ -15,40 +15,42 @@ class ListFavoritePage extends StatelessWidget {
   const ListFavoritePage({super.key});
 
   Widget _buildList(BuildContext context) {
-    return Consumer<DatabaseProvider>(
-      builder: (context, state, _) {
-        if (state.state == ResultState.loading) {
+    return Consumer2<DatabaseProvider, RestaurantListProvider>(
+      builder: (context, db, list, _) {
+        if (db.state == ResultState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state.state == ResultState.dataValid) {
+        } else if (db.state == ResultState.dataValid &&
+            list.state == ResultState.dataValid) {
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: state.favorites.length,
+            itemCount: db.favorites.length,
             itemBuilder: (context, index) {
-              return Consumer2<RestaurantListProvider,
-                  RestaurantDetailProvider>(
-                builder: (context, list, detail, _) => RestoCard(
-                  data: list.getRestaurant(state.favorites[index].restaurantId),
+              return Consumer<RestaurantDetailProvider>(
+                builder: (context, detail, _) => RestoCard(
+                  data: list.getRestaurant(db.favorites[index].restaurantId),
                   onTap: () {
                     Navigator.pushNamed(context, DetailPage.routeName);
-                    detail.getRestaurantDetail(
-                        state.favorites[index].restaurantId);
+                    detail
+                        .getRestaurantDetail(db.favorites[index].restaurantId);
                   },
                 ),
               );
             },
           );
-        } else if (state.state == ResultState.error) {
+        } else if (db.state == ResultState.error) {
           return Center(
             child: Material(
-              child: Text(state.message),
+              child: Text(db.message),
             ),
           );
-        } else if (state.favorites.isEmpty) {
+        } else if (db.favorites.isEmpty) {
           return const Material(child: Text("No Favorite Restaurant"));
         } else {
-          return const Material(child: Text(""));
+          return const Material(
+              child: Text(
+                  "Something went wrong, \nplease check your internet connection"));
         }
       },
     );
