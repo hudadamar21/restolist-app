@@ -22,7 +22,9 @@ class ScheduleProvider extends ChangeNotifier {
     preferencesHelper.setDailyReminder(value);
     notifyListeners();
     if (_isDailyReminderActive) {
-      debugPrint('Daily Reminder Active');
+      if (kDebugMode) {
+        print('Daily Reminder Active');
+      }
       return await AndroidAlarmManager.periodic(
         const Duration(hours: 24),
         1,
@@ -32,7 +34,9 @@ class ScheduleProvider extends ChangeNotifier {
         wakeup: true,
       );
     } else {
-      debugPrint('Daily Reminder Non Active');
+      if (kDebugMode) {
+        print('Daily Reminder Non Active');
+      }
       return await AndroidAlarmManager.cancel(1);
     }
   }

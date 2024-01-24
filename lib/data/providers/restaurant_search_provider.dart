@@ -17,7 +17,6 @@ class RestaurantSearchProvider extends ChangeNotifier {
   RestaurantSearch get result => _result;
 
   Future<dynamic> searchRestaurant(String value) async {
-    debugPrint(value);
     try {
       _result = RestaurantSearch(error: true, founded: 0, restaurants: []);
       _isLoading = true;
@@ -33,17 +32,13 @@ class RestaurantSearchProvider extends ChangeNotifier {
 
       notifyListeners();
       _isLoading = false;
-      debugPrint(restaurantLists);
       return _result = restaurantLists;
     } catch (e) {
-      if (e is SocketException) {
-        _isLoading = false;
-        notifyListeners();
-        return _message = 'No Internet Connection';
-      }
-
       _isLoading = false;
       notifyListeners();
+      if (e is SocketException) {
+        return _message = 'No Internet Connection';
+      }
       return _message = e.toString();
     }
   }

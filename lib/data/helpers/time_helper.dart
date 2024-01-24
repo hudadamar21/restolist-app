@@ -3,9 +3,8 @@ import 'package:intl/intl.dart';
 class TimeHelper {
   static DateTime format() {
     final now = DateTime.now();
-    print(now);
     final dateFormat = DateFormat('y/M/d');
-    const timeSpecific = "12:30:00";
+    const timeSpecific = "11:00:00";
     final completeFormat = DateFormat('y/M/d H:m:s');
 
     final todayDate = dateFormat.format(now);
