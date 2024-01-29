@@ -84,7 +84,6 @@ class MainApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        useMaterial3: true,
       ),
     );
   }

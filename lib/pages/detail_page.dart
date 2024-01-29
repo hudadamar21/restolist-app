@@ -11,7 +11,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final restaurant = ModalRoute.of(context)?.settings.arguments as Resto;
     return Scaffold(
       body: Consumer<RestaurantDetailProvider>(
         builder: (context, state, _) {

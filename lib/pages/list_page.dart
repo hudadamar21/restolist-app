@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/enums/ResultState.dart';
@@ -13,7 +11,6 @@ import 'package:restaurant_app/widget/resto_card.dart';
 class ListPage extends StatelessWidget {
   static const routeName = '/';
 
-class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
   Widget _buildList(BuildContext context) {
@@ -146,23 +143,7 @@ class ListPage extends StatefulWidget {
                   const SizedBox(height: 20),
                 ],
               ),
-              Expanded(
-                child: ListView.builder(
-                  // the number of items in the list
-                  itemCount: restolist.length,
-                  // display each item of the product list
-                  itemBuilder: (context, index) {
-                    return RestoCard(
-                      restaurant: restolist[index],
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        '/detail',
-                        arguments: restolist[index],
-                      ),
-                    );
-                  },
-                ),
-              )
+              Expanded(child: _buildList(context))
             ],
           ),
         ),

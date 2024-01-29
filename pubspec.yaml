@@ -1,4 +1,4 @@
-name: restoran
+name: restaurant_app
 description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
@@ -30,4 +30,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/restaurant.json
+    - assets/images/placeholder.png
